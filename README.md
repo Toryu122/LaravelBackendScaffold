@@ -38,20 +38,24 @@ Create file .env with format like this
 ```sh
 # Database information.
 DB_DATABASE=
-DB_CONNECTION=mysql
+DB_CONNECTION=
 DB_HOST=
 DB_PORT=
 DB_USERNAME=
 DB_PASSWORD=
+DB_ENGINE=
+
 # Encryption keys
 IV=<IV>
 ENCRYPTION_KEY=<EncryptionKey>
+ADMIN_NAME=
 ADMIN_EMAIL=
 ADMIN_USERNAME=
 ADMIN_PASSWORD=
+
 # Common info
 APP_KEY=
-APP=production
+APP_ENV=local (or production)
 ```
 
 
