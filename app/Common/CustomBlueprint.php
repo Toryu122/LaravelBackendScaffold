@@ -16,6 +16,7 @@ class CustomBlueprint extends Blueprint
      */
     public function audit(bool $reference = true, bool $defaultIndex = true)
     {
+        $this->engine = 'InnoDB'; // to support foreign keys, because MyISAM does not support it, probaly shouldn't be used here
         if ($defaultIndex) {
             $this->increments('id')->unique();
         }
