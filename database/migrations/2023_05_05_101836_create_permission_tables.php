@@ -27,7 +27,6 @@ class CreatePermissionTables extends Migration
         }
 
         CustomSchema::create($tableNames['permissions'], function (CustomBlueprint $table) {
-            $table->engine = 'InnoDB';
             $table->string('name');       // For MySQL 8.0 use string('name', 125);
             $table->string('guard_name')->default('web'); // For MySQL 8.0 use string('guard_name', 125);
             $table->string('description')->nullable();
@@ -36,7 +35,6 @@ class CreatePermissionTables extends Migration
         });
 
         CustomSchema::create($tableNames['roles'], function (CustomBlueprint $table) use ($teams, $columnNames) {
-            $table->engine = 'InnoDB';
             if ($teams || config('permission.testing')) { // permission.testing is a fix for sqlite testing
                 $table->unsignedBigInteger($columnNames['team_foreign_key'])->nullable();
                 $table->index($columnNames['team_foreign_key'], 'roles_team_foreign_key_index');
