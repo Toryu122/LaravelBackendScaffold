@@ -13,4 +13,5 @@ class Constant
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
     const IS_ACTIVE = 'is_active';
+    const TOKEN_NAME = 'API TOKEN';
 }

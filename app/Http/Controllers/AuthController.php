@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Common\Constant;
+use App\Models\Role;
 use App\Models\User;
 use App\Common\Helper;
-use App\Models\Role;
+use App\Common\Constant;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Common\GlobalVariable;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -16,8 +17,6 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    const TOKEN_NAME = "API TOKEN";
-
     /**
      * Create User
      * @param Request $request
@@ -31,7 +30,7 @@ class AuthController extends Controller
                 $request->all(),
                 [
                     'name' => 'required',
-                    'email' => 'required|email|unique:'. User::TABLE_NAME .',email',
+                    'email' => 'required|email|unique:' . User::TABLE_NAME . ',email',
                     'password' => 'required'
                 ]
             );
@@ -108,7 +107,7 @@ class AuthController extends Controller
     {
         return explode(
             '|',
-            $user->createToken(self::TOKEN_NAME, User::ROLES[$role])->plainTextToken
+            $user->createToken(Constant::TOKEN_NAME, User::ROLES[$role])->plainTextToken
         )[1];
     }
 }
