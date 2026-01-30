@@ -9,11 +9,13 @@ use App\Common\Constant;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Common\GlobalVariable;
+use Carbon\Carbon;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use PhpParser\Node\Const_;
 
 class AuthController extends Controller
 {
@@ -88,6 +90,7 @@ class AuthController extends Controller
             }
 
             $user = User::where('email', $request['email'])->first();
+            $user->tokens()->delete(); // Delete all previous tokens, maybe this should be 'delete expired tokens only'?
 
             return Helper::getResponse([
                 'token' => $this->getToken($user, $user->role),
@@ -107,7 +110,11 @@ class AuthController extends Controller
     {
         return explode(
             '|',
-            $user->createToken(Constant::TOKEN_NAME, User::ROLES[$role])->plainTextToken
+            $user->createToken(
+                Constant::TOKEN_NAME,
+                User::ROLES[$role],
+                Carbon::now()->addMinutes(Constant::TOKEN_EXPIRES_IN) // This will set the token expiration time in expired_at column
+            )->plainTextToken
         )[1];
     }
 }

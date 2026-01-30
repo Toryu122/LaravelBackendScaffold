@@ -8,7 +8,7 @@
 
 ## Overview
 
-This is a scaffold (boilerplate) for a standard Laravel project. Fork this project to continue using and receive updates from upstream
+This is a scaffold (boilerplate) for a standard Laravel project
 
 Feature (v1.0.0)
 + Sanctum authentication
@@ -26,10 +26,6 @@ Feature (v1.0.0)
   + Limit
   + Order by
   + Relation count
-
-Next version
-+ Boilerplate for Frontend
-
 
 ## Requirement & Installation
 
