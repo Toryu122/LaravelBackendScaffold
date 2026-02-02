@@ -11,6 +11,7 @@
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.5",
         "mehradsadeghi/laravel-filter-querystring": "^1.1",
+        "mohamedgaber-intake40/sanctum-refresh-token": "^2.3",
         "spatie/laravel-permission": "^5.10"
     },
     "require-dev": {

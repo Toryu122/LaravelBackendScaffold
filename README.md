@@ -52,6 +52,12 @@ ADMIN_PASSWORD=
 # Common info
 APP_KEY=
 APP_ENV=local (or production)
+# SPA domain (for cookie domain setting)
+SESSION_DOMAIN=
+# Sanctum stateful domains - list all SPA origins
+SANCTUM_STATEFUL_DOMAINS=
+REFRESH_TOKEN_EXPIRES_IN=
+ACCESS_TOKEN_EXPIRES_IN=
 ```
 
 

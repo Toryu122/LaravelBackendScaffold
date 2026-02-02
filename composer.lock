@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "206ee5af84d5d81f936a027fe75b50cc",
+    "content-hash": "0e9c32f0a92ccb5fe62b2dec7fb1770d",
     "packages": [
         {
             "name": "brick/math",
@@ -1944,6 +1944,61 @@
                 "source": "https://github.com/mehradsadeghi/laravel-filter-querystring/tree/v1.1.14"
             },
             "time": "2025-05-15T10:30:11+00:00"
+        },
+        {
+            "name": "mohamedgaber-intake40/sanctum-refresh-token",
+            "version": "v2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mohamedgaber-intake40/sanctum-refresh-token.git",
+                "reference": "5a4b8f511e47b5fd85c344b2aeea85fbe704eadb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mohamedgaber-intake40/sanctum-refresh-token/zipball/5a4b8f511e47b5fd85c344b2aeea85fbe704eadb",
+                "reference": "5a4b8f511e47b5fd85c344b2aeea85fbe704eadb",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/sanctum": "^3.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.11",
+                "nunomaduro/larastan": "^2.0",
+                "orchestra/testbench": "^8.9",
+                "pestphp/pest": "^2.15",
+                "pestphp/pest-plugin-faker": "^2.0",
+                "phpstan/phpstan": "^1.10"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "MohamedGaber\\SanctumRefreshToken\\SanctumRefreshTokenServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MohamedGaber\\SanctumRefreshToken\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mohamed Gaber",
+                    "email": "mohamed.gaberiti40@gmail.com"
+                }
+            ],
+            "description": "add refresh token feature to laravel sanctum official package",
+            "support": {
+                "issues": "https://github.com/mohamedgaber-intake40/sanctum-refresh-token/issues",
+                "source": "https://github.com/mohamedgaber-intake40/sanctum-refresh-token/tree/v2.3"
+            },
+            "time": "2023-09-10T13:54:41+00:00"
         },
         {
             "name": "monolog/monolog",

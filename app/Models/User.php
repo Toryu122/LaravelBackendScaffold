@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use Laravel\Sanctum\HasApiTokens;
+// use Laravel\Sanctum\HasApiTokens;
+use MohamedGaber\SanctumRefreshToken\Traits\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Permission\Traits\HasPermissions;
 use Illuminate\Notifications\Notifiable;
