@@ -16,4 +16,6 @@ class Constant
 
     const ACCESS_TOKEN_NAME = 'access_token';
     const REFRESH_TOKEN_NAME = 'refresh_token';
+    const REFRESH_TOKEN_EXPIRES_IN = 30; // in days
+    const ACCESS_TOKEN_EXPIRES_IN = 1440; // in minutes
 }

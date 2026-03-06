@@ -8,14 +8,12 @@ use App\Common\Helper;
 use App\Common\Constant;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Common\GlobalVariable;
 use Carbon\Carbon;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use PhpParser\Node\Const_;
 
 class AuthController extends Controller
 {
@@ -104,6 +102,37 @@ class AuthController extends Controller
     }
 
     /**
+     * Refresh Access Token
+     * @param Request $request
+     * @return Response
+     */
+    public function refreshToken(Request $request): Response
+    {
+        try {
+            /** @var User $user */
+            $user = $request->user();
+
+            if (!$user->tokenCan('refresh')) {
+                return Helper::getResponse(null, 'Invalid token type. Please use your refresh token.', 403);
+            }
+
+            // Recover the role from the database via Spatie instead.
+            $userRole = $user->getRoleNames()->first();
+            $role = isset(User::ROLES[$userRole]) ? $userRole : 'guest';
+
+            // Revoke all old tokens (access + refresh) before issuing new ones
+            $user->tokens()->delete();
+
+            return Helper::getResponse([
+                'access_token'  => $this->getAccessToken($user, $role),
+                'refresh_token' => $this->getRefreshToken($user, $role),
+            ]);
+        } catch (\Throwable $th) {
+            return Helper::getResponse(null, $th->getMessage());
+        }
+    }
+
+    /**
      * @param User $user
      * @param string $role
      * @return mixed|string
@@ -114,7 +143,7 @@ class AuthController extends Controller
             '|',
             $user->createAuthToken(
                 Constant::ACCESS_TOKEN_NAME,
-                Carbon::now()->addMinutes(env('ACCESS_TOKEN_EXPIRES_IN', 1440)), // This will set the token expiration time (in minutes) in expired_at column
+                Carbon::now()->addMinutes(Constant::ACCESS_TOKEN_EXPIRES_IN), // This will set the token expiration time (in minutes) in expired_at column
                 User::ROLES[$role]
             )->plainTextToken
         )[1];
@@ -130,7 +159,7 @@ class AuthController extends Controller
             '|',
             $user->createRefreshToken(
                 Constant::REFRESH_TOKEN_NAME,
-                Carbon::now()->addDays(env('REFRESH_TOKEN_EXPIRES_IN', 30)), // Refresh token valid for 30 days
+                Carbon::now()->addDays(Constant::REFRESH_TOKEN_EXPIRES_IN), // Refresh token valid for 30 days
                 User::ROLES[$role]
             )->plainTextToken
         )[1];

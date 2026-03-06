@@ -26,4 +26,8 @@ Route::middleware(['auth:sanctum', AuthStore::class])->group(function () {
     Route::resource('permissions', PermissionController::class);
     Route::post('permission/assign', [PermissionController::class, 'assignPermissionToRole']);
     Route::post('role/assign', [RoleController::class, 'assignRoleToUser']);
+
+    // ->name('api.token.refresh'); too identify refresh route to the mohamedgaber-intake40/sanctum-refresh-token library
+    Route::get('auth/refresh', [AuthController::class, 'refreshToken'])->name('api.token.refresh');
+    // Route::post('auth/logout', [AuthController::class, 'logoutUser']); 
 });
