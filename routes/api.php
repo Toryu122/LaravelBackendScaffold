@@ -21,11 +21,15 @@ use App\Http\Controllers\RoleController;
 
 Route::post('auth/register', [AuthController::class, 'createUser']);
 Route::post('auth/login', [AuthController::class, 'loginUser']);
+
 Route::middleware(['auth:sanctum', AuthStore::class])->group(function () {
-    Route::resource('roles', RoleController::class);
-    Route::resource('permissions', PermissionController::class);
-    Route::post('permission/assign', [PermissionController::class, 'assignPermissionToRole']);
-    Route::post('role/assign', [RoleController::class, 'assignRoleToUser']);
+    // Endpoints that require 'admin' role
+    Route::middleware(['role:admin'])->group(function () {
+        Route::resource('roles', RoleController::class);
+        Route::resource('permissions', PermissionController::class);
+        Route::post('permission/assign', [PermissionController::class, 'assignPermissionToRole']);
+        Route::post('role/assign', [RoleController::class, 'assignRoleToUser']);
+    });
 
     // ->name('api.token.refresh'); too identify refresh route to the mohamedgaber-intake40/sanctum-refresh-token library
     Route::get('auth/refresh', [AuthController::class, 'refreshToken'])->name('api.token.refresh');
