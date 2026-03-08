@@ -11,7 +11,7 @@
 This is a scaffold (boilerplate) for a standard Laravel project
 
 Feature (v1.0.0)
-+ Sanctum authentication
++ Sanctum authentication (with refresh token
 + Basic CRUD by default for every model defined
 + Basic query functions based on [FilterQueryString library](https://github.com/mehradsadeghi/laravel-filter-querystring) including
   + Filter
